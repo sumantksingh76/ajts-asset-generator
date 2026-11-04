@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJTS Computers - Asset Sticker & Master Sheet Generator (A4 - 4 in a Row)</title>
+  <meta name="description"
+    content="Professional A4 Bulk Sticker, Master Inventory Sheet, and Asset Tag Generator for AJTS Computers. Includes scannable QR Codes, Desktop and Screen categories, and 4-in-a-row A4 layout.">
+
+  <!-- Modern Clean Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=6">
+</head>
+
+<body>
+
+  <!-- Fullscreen Secure Authentication Barrier -->
+  <div id="authOverlay" class="auth-overlay">
+    <div class="auth-modal-card">
+      <div class="auth-brand-badge">
+        <div class="auth-logo-box">
+          <img src="assets/logo_clean.png" alt="AJTS Logo">
+        </div>
+        <div class="auth-brand-text">
+          <h2>AJTS COMPUTERS</h2>
+          <span>RENTAL SERVICES &bull; ASSET SECURITY</span>
+        </div>
+      </div>
+
+      <div class="auth-header-info">
+        <h3>Sign In to Asset Manager</h3>
+        <p>Restricted access. Sign in to view and generate stickers, Master Sheets, and asset tags.</p>
+      </div>
+
+      <div id="authAlertBanner" class="auth-alert" style="display: none;">
+        <span class="auth-alert-icon">⚠️</span>
+        <span id="authAlertMsg">Invalid username or password.</span>
+      </div>
+
+      <form id="authLoginForm" class="auth-form" autocomplete="off">
+        <div class="auth-field-group">
+          <label for="authUsername">Username</label>
+          <div class="auth-input-wrapper">
+            <span class="auth-input-icon">👤</span>
+            <input type="text" id="authUsername" class="auth-input" placeholder="Enter your username" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="auth-field-group">
+          <label for="authPassword">Password</label>
+          <div class="auth-input-wrapper">
+            <span class="auth-input-icon">🔑</span>
+            <input type="password" id="authPassword" class="auth-input" placeholder="Enter your password" required autocomplete="current-password">
+            <button type="button" id="btnTogglePassword" class="auth-pw-btn" title="Toggle password visibility">👁️</button>
+          </div>
+        </div>
+
+        <div class="auth-options-row">
+          <label class="auth-remember-label">
+            <input type="checkbox" id="authRememberMe" checked>
+            <span>Remember login on this computer</span>
+          </label>
+        </div>
+
+        <button type="submit" id="btnAuthSubmit" class="auth-submit-btn">
+          <span>🔓</span> Sign In to AJTS Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Top Navigation & Action Header -->
+  <header class="app-header no-print">
+    <div class="brand-wrapper">
+      <div class="brand-icon">
+        <img src="assets/logo_clean.png" alt="AJTS Logo">
+      </div>
+      <div class="brand-title">
+        <h1>AJTS Asset Sticker &amp; Master Sheet <span class="badge-tag">4 in a Row (A4)</span></h1>
+        <p>Rental Services Hardware Asset Tag &amp; Scannable QR Inventory System</p>
+      </div>
+    </div>
+
+    <!-- Active Category Quick Pills -->
+    <div class="category-quick-pills">
+      <button id="pillMaster" class="category-pill active" title="Show Master Sheet (All Desktop & Screen records)">
+        <span>📋</span> Master (<span id="pillMasterCount">40</span>)
+      </button>
+      <button id="pillDesktop" class="category-pill" title="Show Desktop records">
+        <span>💻</span> Desktop (<span id="pillDesktopCount">20</span>)
+      </button>
+      <button id="pillScreen" class="category-pill" title="Show Screen records">
+        <span>🖥️</span> Screen (<span id="pillScreenCount">20</span>)
+      </button>
+    </div>
+
+    <div class="header-actions">
+      <div id="userSessionBadge" class="user-session-badge" title="Authenticated User Session">
+        <span class="user-avatar-dot"></span>
+        <span id="headerUserName">admin</span>
+        <span id="headerUserRole" class="user-role-tag">Admin</span>
+      </div>
+      <button id="btnLogout" class="btn btn-secondary btn-sm btn-logout" title="Lock session & sign out">
+        <span>🔒</span> Sign Out
+      </button>
+      <button id="btnLoadSample" class="btn btn-secondary btn-sm" title="Reload default Desktop + Screen items">
+        <span>🔄</span> Reset Demo Data
+      </button>
+      <button id="btnExportXlsx" class="btn btn-sheets btn-sm"
+        title="Download genuine Microsoft Excel (.xlsx) workbook with Master, Desktop & Screen tabs">
+        <span>📊</span> Excel (.xlsx)
+      </button>
+      <button id="btnExportZip" class="btn btn-secondary btn-sm"
+        title="Download all stickers as 300DPI PNGs in a ZIP file">
+        <span>📦</span> Export All (ZIP)
+      </button>
+      <button id="btnPrint" class="btn btn-primary" title="Print stickers on A4 paper or save as PDF (4 in a row)">
+        <span>🖨️</span> Print A4 Sheets
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <div class="app-container">
+
+    <!-- Left Controls Panel -->
+    <aside class="sidebar-panel no-print">
+
+      <!-- Input Mode Navigation Tabs -->
+      <nav class="tabs-nav">
+        <button class="tab-btn active" data-tab="tabSingle">
+          <span>➕</span> Single Add
+        </button>
+        <button class="tab-btn" data-tab="tabRange">
+          <span>⚡</span> Bulk Range
+        </button>
+        <button class="tab-btn" data-tab="tabPaste">
+          <span>📋</span> Excel / CSV
+        </button>
+        <button class="tab-btn" data-tab="tabSettings">
+          <span>⚙️</span> Settings
+        </button>
+      </nav>
+
+      <!-- TAB 1: Single Item Form -->
+      <section id="tabSingle" class="tab-content active">
+        <form id="singleForm" autocomplete="off">
+          <div class="form-group">
+            <label for="inpCategory">Category (Printed on Sticker)</label>
+            <select id="inpCategory" class="select-control">
+              <option value="desktop" selected>💻 Desktop (Laptops / Desktops / Workstations)</option>
+              <option value="screen">🖥️ Screen (Monitors / Displays)</option>
+            </select>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="inpNumber">Badge # <span class="hint">(Top-Right)</span></label>
+              <input type="text" id="inpNumber" class="input-control" value="41" required>
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label for="inpModel">Model Name</label>
+              <input type="text" id="inpModel" class="input-control" value="Dell 3420" placeholder="e.g. Dell 3420"
+                required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inpSerial">Serial Number <span class="hint">(Will encode into QR)</span></label>
+            <input type="text" id="inpSerial" class="input-control" value="3GNGBM2" placeholder="e.g. 3GNGBM2" required>
+          </div>
+
+          <div class="form-group">
+            <label for="inpCustomQr">Custom QR Content <span class="hint">(Optional override)</span></label>
+            <input type="text" id="inpCustomQr" class="input-control" placeholder="Defaults to Serial Number">
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <span>➕</span> Add Record &amp; Create Sticker
+          </button>
+        </form>
+      </section>
+
+      <!-- TAB 2: Bulk Range Generator -->
+      <section id="tabRange" class="tab-content">
+        <form id="rangeForm" autocomplete="off">
+          <div class="form-group">
+            <label for="bulkTargetTab">Target Hardware Category</label>
+            <select id="bulkTargetTab" class="select-control">
+              <option value="desktop" selected>💻 Desktop (Laptops / Desktops)</option>
+              <option value="screen">🖥️ Screen (Monitors / Displays)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="bulkModel">Device Model Name</label>
+            <input type="text" id="bulkModel" class="input-control" value="Dell 3420" placeholder="e.g. Dell 3420"
+              required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bulkStartNum">Start Number</label>
+              <input type="number" id="bulkStartNum" class="input-control" value="1" min="1" required>
+            </div>
+            <div class="form-group">
+              <label for="bulkEndNum">End Number</label>
+              <input type="number" id="bulkEndNum" class="input-control" value="24" min="1" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" id="bulkPadZeroes">
+              <span>Pad single digits with zero (e.g. 01, 02, 03...)</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="bulkSerialMode">Serial Number Generation Mode</label>
+            <select id="bulkSerialMode" class="select-control">
+              <option value="random">Dell Service Tag Style (e.g. 7-digit 3GNGBM2)</option>
+              <option value="prefix">Prefix + Sequential Number (e.g. AJTS-001)</option>
+              <option value="list">Paste List of Exact Serials</option>
+            </select>
+          </div>
+
+          <div id="prefixGroup" class="form-row" style="display: none;">
+            <div class="form-group">
+              <label for="bulkSerialPrefix">Prefix</label>
+              <input type="text" id="bulkSerialPrefix" class="input-control" value="AJTS-">
+            </div>
+            <div class="form-group">
+              <label for="bulkSerialStart">Start At</label>
+              <input type="number" id="bulkSerialStart" class="input-control" value="1001">
+            </div>
+          </div>
+
+          <div id="listGroup" class="form-group" style="display: none;">
+            <label for="bulkSerialList">List of Serials <span class="hint">(One per line)</span></label>
+            <textarea id="bulkSerialList" class="input-control" rows="4"
+              placeholder="3GNGBM2&#10;5HTK8P2&#10;8CD1234"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <span>⚡</span> Generate Bulk Stickers (4 in a row)
+          </button>
+        </form>
+      </section>
+
+      <!-- TAB 3: Bulk Excel / CSV / TSV Paste -->
+      <section id="tabPaste" class="tab-content">
+        <form id="bulkPasteForm">
+          <div class="form-group">
+            <label for="pasteTargetTab">Target Category</label>
+            <select id="pasteTargetTab" class="select-control">
+              <option value="desktop" selected>💻 Desktop (Laptops / Desktops)</option>
+              <option value="screen">🖥️ Screen (Monitors / Displays)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="bulkTextarea">Paste Rows from Excel / Google Sheets <span class="hint">(Tab/Comma
+                separated)</span></label>
+            <textarea id="bulkTextarea" class="input-control" rows="5"
+              placeholder="Number, Model, Serial&#10;19, Dell 3420, 3GNGBM2&#10;20, Dell Latitude 5420, 5HTK8P2&#10;21, HP ProBook 450, 8CD12345"></textarea>
+          </div>
+
+          <div class="file-dropzone" id="dropZone">
+            <input type="file" id="csvFileInput" accept=".csv,.txt" style="display: none;">
+            <div>📂</div>
+            <p>Click or Drag &amp; Drop <span>.CSV file</span> here</p>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <span>📥</span> Import Pasted Data to Master Sheet
+          </button>
+        </form>
+      </section>
+
+      <!-- TAB 4: Layout & Branding Settings -->
+      <section id="tabSettings" class="tab-content">
+        <div class="form-group">
+          <label for="selectGrid">A4 Sheet Grid Layout</label>
+          <select id="selectGrid" class="select-control">
+            <option value="grid-24-4x6" selected>⭐ 4 in a row (24 per A4, 4×6) [Recommended - Zero Extra Space]</option>
+            <option value="grid-20-4x5">4 in a row (20 per A4, 4×5)</option>
+            <option value="grid-16-4x4">4 in a row (16 per A4, 4×4)</option>
+            <option value="grid-15">3 in a row (15 per A4, 3×5)</option>
+            <option value="grid-8">2 in a row (8 per A4, 2×4)</option>
+            <option value="grid-16">2 in a row (16 per A4, 2×8)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <input type="checkbox" id="checkCuttingGuides">
+            <span>Show dashed cutting guide borders (for scissors cutting)</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="selectQrMode">QR Code Content Format</label>
+          <select id="selectQrMode" class="select-control">
+            <option value="serial" selected>Serial Number Only (e.g. 3GNGBM2)</option>
+            <option value="model-serial">Model + Serial (e.g. Dell 3420 | 3GNGBM2)</option>
+            <option value="full-info">Full Asset Info (Asset #, Model, Serial)</option>
+            <option value="custom-url">Custom Web Asset URL</option>
+          </select>
+        </div>
+
+        <div id="urlPatternGroup" class="form-group" style="display: none;">
+          <label for="inpUrlPattern">URL Pattern <span class="hint">(Tokens: {serial}, {number}, {model})</span></label>
+          <input type="text" id="inpUrlPattern" class="input-control" value="https://ajtscomputers.com/asset/{serial}">
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--border-surface); margin: 16px 0;">
+
+        <div class="form-group">
+          <label for="inpCompName">Company Name (Line 1)</label>
+          <input type="text" id="inpCompName" class="input-control" value="AJTS">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inpCompSub">Line 2</label>
+            <input type="text" id="inpCompSub" class="input-control" value="COMPUTERS">
+          </div>
+          <div class="form-group">
+            <label for="inpCompTag">Line 3</label>
+            <input type="text" id="inpCompTag" class="input-control" value="RENTAL SERVICES">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Company Logo</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="file" id="logoFileInput" accept="image/*" class="input-control" style="padding: 5px;">
+            <button type="button" id="btnResetLogo" class="btn btn-secondary btn-sm"
+              title="Reset to original AJTS logo">Reset</button>
+          </div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--border-surface); margin: 18px 0;">
+
+        <!-- Security & User Management Box -->
+        <div class="settings-security-box">
+          <div class="settings-security-header">
+            <h4>🛡️ User Management &amp; Security</h4>
+            <span class="security-active-pill">Multi-User</span>
+          </div>
+          <p class="settings-security-sub">Manage authorized user accounts, add operators or administrators, and update passwords.</p>
+
+          <!-- Current Authorized Users List -->
+          <div class="users-list-wrapper">
+            <div class="users-list-header">
+              <span class="users-list-title">👥 Authorized Accounts (<span id="userCountBadge">1</span>)</span>
+              <button type="button" id="btnToggleAddUser" class="btn btn-primary btn-sm" style="padding: 4px 10px; font-size: 0.76rem;">
+                <span>➕</span> Add User
+              </button>
+            </div>
+            
+            <div id="usersListContainer" class="users-list-container">
+              <!-- Dynamically populated user list -->
+            </div>
+          </div>
+
+          <!-- Add User Form Container (Collapsible) -->
+          <div id="addUserBox" class="add-user-box" style="display: none;">
+            <div class="add-user-box-header">
+              <h5>➕ Create New User Account</h5>
+              <button type="button" id="btnCloseAddUser" class="btn-close-sm" title="Close">✕</button>
+            </div>
+            <form id="addUserForm" autocomplete="off">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="newUsername">Username</label>
+                  <input type="text" id="newUsername" class="input-control" placeholder="e.g. operator1" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label for="newUserRole">Access Role</label>
+                  <select id="newUserRole" class="select-control">
+                    <option value="Operator" selected>Operator (View &amp; Print)</option>
+                    <option value="Admin">Admin (Full Access)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="newUserPassword">Password</label>
+                  <input type="password" id="newUserPassword" class="input-control" placeholder="Min 4 chars" required autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                  <label for="newUserConfirmPassword">Confirm Password</label>
+                  <input type="password" id="newUserConfirmPassword" class="input-control" placeholder="Re-type password" required autocomplete="new-password">
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px; margin-top: 8px;">
+                <button type="submit" class="btn btn-primary btn-sm" style="flex: 1;">
+                  <span>💾</span> Save &amp; Authorize User
+                </button>
+                <button type="button" id="btnCancelAddUser" class="btn btn-secondary btn-sm">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <hr style="border: 0; border-top: 1px dashed var(--border-surface); margin: 14px 0;">
+
+          <!-- Change Current User Password -->
+          <div class="change-pw-section">
+            <h5 style="font-size: 0.8rem; font-weight: 700; margin-bottom: 8px; color: #cbd5e1;">
+              🔑 Change Password for <span id="changePwActiveUser" style="color: #60a5fa;">admin</span>
+            </h5>
+            <form id="changePasswordForm" class="security-pw-form" autocomplete="off">
+              <div class="form-group">
+                <label for="currPassword">Current Password</label>
+                <input type="password" id="currPassword" class="input-control" placeholder="Enter current password" required autocomplete="current-password">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="newPassword">New Password</label>
+                  <input type="password" id="newPassword" class="input-control" placeholder="New password" required autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm Password</label>
+                  <input type="password" id="confirmPassword" class="input-control" placeholder="Re-type new password" required autocomplete="new-password">
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px; margin-top: 8px;">
+                <button type="submit" class="btn btn-primary btn-sm" style="flex: 1;">
+                  <span>🔑</span> Update My Password
+                </button>
+                <button type="button" id="btnResetSecurity" class="btn btn-secondary btn-sm" title="Reset all users to default admin">
+                  <span>🔄</span> Reset to Default
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sticker Items Queue Table -->
+      <div class="items-list-container">
+        <div class="items-header">
+          <div class="items-title">
+            <span>Sticker Queue</span>
+            <span id="totalStickersCount" class="items-badge">40 items</span>
+          </div>
+          <button id="btnClearAll" class="btn-danger-outline btn-sm"
+            style="border-radius: 4px; padding: 2px 8px; cursor: pointer;">
+            Clear All
+          </button>
+        </div>
+        <div class="table-scroll">
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Category</th>
+                <th>Model</th>
+                <th>Serial</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="itemsTableBody">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Right Main Workspace / Live Preview Area -->
+    <main class="main-workspace">
+
+      <!-- Workspace Toolbar -->
+      <div class="workspace-toolbar no-print">
+        <div class="view-selector">
+          <button id="viewSheetBtn" class="view-btn active" title="View & edit all inventory data in live Master Sheet">
+            <span>📊</span> Master Sheet (All Records)
+          </button>
+          <button id="viewA4Btn" class="view-btn" title="View printable A4 sheets formatted with 4 in a row">
+            <span>📄</span> A4 Print Sheets (4 in a row)
+          </button>
+          <button id="viewSingleBtn" class="view-btn" title="Zoom in on a single high-definition sticker">
+            <span>🔍</span> Single Zoom
+          </button>
+          <button id="viewCompareBtn" class="view-btn" title="Compare with original photo">
+            <span>⚖️</span> Compare with Photo
+          </button>
+        </div>
+
+        <div class="preview-stats">
+          <div class="stat-item" style="display: flex; gap: 4px; align-items: center;">
+            <button id="btnQuickGrid24" class="btn btn-sm btn-primary"
+              title="4 in a row × 6 rows (24 stickers per A4 page)">
+              ⭐ 4 in a row (24/A4)
+            </button>
+            <button id="btnQuickGrid20" class="btn btn-sm btn-secondary"
+              title="4 in a row × 5 rows (20 stickers per A4 page)">
+              4 in a row (20/A4)
+            </button>
+            <button id="btnQuickGrid15" class="btn btn-sm btn-secondary"
+              title="3 in a row × 5 rows (15 stickers per A4 page)">
+              3 in a row (15/A4)
+            </button>
+          </div>
+          <div class="stat-item">
+            <span>Records:</span>
+            <strong id="statTotalCount">40</strong>
+          </div>
+          <div class="stat-item">
+            <span>A4 Sheets:</span>
+            <strong id="statPagesCount">2</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview Viewport -->
+      <div id="previewViewport" class="preview-viewport">
+        <!-- Rendered Live Master Sheet or A4 sheets will be injected here -->
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/qrcode.bundle.js"></script>
+  <script src="assets/jszip.bundle.js"></script>
+  <script src="assets/xlsx.bundle.js"></script>
+  <script src="assets/logo.js"></script>
+  <script src="app.js?v=6"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,3061 @@
+/* ==========================================================================
+   AJTS Sticker & Asset Label Generator - Stylesheet
+   Redesigned: 4 in a row on A4, Large Logo, ZERO extra space between fields,
+   Desktop & Screen Category Labels
+   ========================================================================== */
+
+:root {
+  --primary-blue: #002c91;
+  --primary-blue-hover: #002273;
+  --primary-blue-light: #e8effe;
+  --dark-text: #0e1726;
+  --secondary-text: #475569;
+  --muted-text: #94a3b8;
+  --card-border: #002c91;
+  --divider-color: #cbd5e1;
+  
+  /* App UI Theme Colors */
+  --bg-main: #0b0f19;
+  --bg-surface: #111827;
+  --bg-surface-elevated: #1f293d;
+  --border-surface: #1e293b;
+  --accent-cyan: #06b6d4;
+  --accent-blue: #2563eb;
+  --sheets-green: #0f9d58;
+  --sheets-green-dark: #0b8043;
+  --sheets-green-light: #e6f4ea;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --danger: #ef4444;
+  --success: #10b981;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* App Header */
+.app-header {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-surface);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e8f0;
+}
+
+.brand-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.brand-title h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge-tag {
+  font-size: 0.7rem;
+  background: var(--accent-blue);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.brand-title p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Category Quick Selector Pills in Header */
+.category-quick-pills {
+  display: flex;
+  background: #090d16;
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid #1e293b;
+  margin-right: 12px;
+}
+
+.category-pill {
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.category-pill:hover {
+  color: #ffffff;
+}
+
+.category-pill.active {
+  background: #002c91;
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 44, 145, 0.4);
+}
+
+.category-pill.active-desktop {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.category-pill.active-screen {
+  background: #10b981;
+  color: #ffffff;
+}
+
+/* Button Component Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0036b3 0%, #002c91 100%);
+  color: #ffffff;
+  border-color: #1e40af;
+  box-shadow: 0 2px 8px rgba(0, 44, 145, 0.35);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0040d6 0%, #0036b3 100%);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--bg-surface-elevated);
+  color: #e2e8f0;
+  border-color: var(--border-surface);
+}
+
+.btn-secondary:hover {
+  background: #28354f;
+  color: #ffffff;
+}
+
+.btn-sheets {
+  background: #0f9d58;
+  color: #ffffff;
+  border-color: #0b8043;
+}
+
+.btn-sheets:hover {
+  background: #0b8043;
+}
+
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 0.76rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-danger-outline {
+  background: transparent;
+  color: #f87171;
+  border: 1px solid #7f1d1d;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-danger-outline:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* Main Layout Grid */
+.app-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - 61px);
+}
+
+/* Left Sidebar Controls */
+.sidebar-panel {
+  width: 380px;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-surface);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+/* Sidebar Navigation Tabs */
+.tabs-nav {
+  display: flex;
+  background: #0b0f19;
+  border-bottom: 1px solid var(--border-surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all 0.15s;
+}
+
+.tab-btn:hover {
+  color: #ffffff;
+}
+
+.tab-btn.active {
+  color: #60a5fa;
+  border-bottom-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.08);
+}
+
+/* Tab Content Areas */
+.tab-content {
+  display: none;
+  padding: 16px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.form-row-3 {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 10px;
+}
+
+label {
+  display: block;
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 5px;
+}
+
+label .hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.input-control,
+.select-control {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 0.825rem;
+  background: #0b0f19;
+  border: 1px solid var(--border-surface);
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.input-control:focus,
+.select-control:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* File Drop Zone */
+.file-dropzone {
+  border: 2px dashed var(--border-surface);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.4);
+  transition: all 0.2s;
+  margin-bottom: 14px;
+}
+
+.file-dropzone:hover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.file-dropzone div {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+
+.file-dropzone p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.file-dropzone span {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+/* Sticker Items Queue List in Sidebar */
+.items-list-container {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-surface);
+  background: rgba(11, 15, 25, 0.6);
+  flex: 1;
+}
+
+.items-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.items-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.items-badge {
+  font-size: 0.7rem;
+  background: #1e293b;
+  color: #94a3b8;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+.table-scroll {
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid var(--border-surface);
+  border-radius: var(--radius-sm);
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.items-table th {
+  background: #090d16;
+  padding: 6px 8px;
+  text-align: left;
+  color: var(--text-muted);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid var(--border-surface);
+}
+
+.items-table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid #1a2234;
+  color: #e2e8f0;
+}
+
+.items-table td code {
+  font-family: monospace;
+  word-break: break-all;
+  white-space: normal;
+}
+
+.items-table tr:hover {
+  background: rgba(30, 41, 59, 0.5);
+}
+
+.items-table .td-num {
+  font-weight: 700;
+  color: #60a5fa;
+}
+
+.items-table .td-actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.action-icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 2px 4px;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.action-icon-btn:hover {
+  opacity: 1;
+}
+
+/* Right Main Workspace Area */
+.main-workspace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #070a12;
+  overflow: hidden;
+}
+
+/* Workspace Toolbar */
+.workspace-toolbar {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-surface);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.view-selector {
+  display: flex;
+  gap: 4px;
+  background: #090d16;
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border-surface);
+}
+
+.view-btn {
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.view-btn:hover {
+  color: #ffffff;
+}
+
+.view-btn.active {
+  background: #002c91;
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 44, 145, 0.4);
+}
+
+.view-btn.active-sheet {
+  background: #0f9d58;
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(15, 157, 88, 0.4);
+}
+
+.preview-stats {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.stat-item strong {
+  color: #ffffff;
+  font-size: 0.85rem;
+}
+
+/* Preview Viewport Canvas/Scroll Area */
+.preview-viewport {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #050811;
+}
+
+/* ==========================================================================
+   MASTER INVENTORY / GOOGLE SHEET VIEW
+   ========================================================================== */
+
+.google-sheets-container {
+  width: 100%;
+  max-width: 1100px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sheets-top-bar {
+  background: #ffffff;
+  padding: 12px 18px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sheets-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sheets-logo {
+  width: 34px;
+  height: 34px;
+  background: #0f9d58;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 1.15rem;
+  box-shadow: 0 2px 6px rgba(15, 157, 88, 0.35);
+}
+
+.sheets-title-text h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #202124;
+  line-height: 1.2;
+}
+
+.sheets-title-text span {
+  font-size: 0.74rem;
+  color: #5f6368;
+}
+
+.sheets-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Formula Bar */
+.sheets-formula-bar {
+  display: flex;
+  align-items: center;
+  background: #f8fafd;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  color: #3c4043;
+}
+
+.sheets-fx-label {
+  font-weight: 700;
+  color: #70757a;
+  padding: 0 12px 0 4px;
+  border-right: 1px solid #dadce0;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.sheets-cell-name {
+  width: 55px;
+  font-weight: 700;
+  color: #1a73e8;
+  padding: 0 8px;
+}
+
+.sheets-cell-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  color: #202124;
+  background: transparent;
+}
+
+/* Grid Table */
+.sheets-grid-wrapper {
+  overflow-x: auto;
+  max-height: 520px;
+  background: #ffffff;
+}
+
+.sheets-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.825rem;
+}
+
+.sheets-table th {
+  background: #f1f3f4;
+  color: #5f6368;
+  font-weight: 600;
+  padding: 7px 12px;
+  border: 1px solid #dadce0;
+  text-align: left;
+  user-select: none;
+  font-size: 0.76rem;
+}
+
+.sheets-table th.col-row-idx {
+  width: 44px;
+  text-align: center;
+  background: #e8eaed;
+}
+
+.sheets-table td {
+  border: 1px solid #e0e0e0;
+  padding: 4px 8px;
+  color: #202124;
+  position: relative;
+  min-height: 28px;
+}
+
+.sheets-table tr:hover td {
+  background: #f8fafd;
+}
+
+.sheets-table td.cell-row-idx {
+  background: #f1f3f4;
+  color: #5f6368;
+  text-align: center;
+  font-weight: 500;
+  user-select: none;
+  font-size: 0.75rem;
+}
+
+.sheets-cell-edit {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.825rem;
+  color: #202124;
+  padding: 3px 4px;
+}
+
+.sheets-cell-edit:focus {
+  background: #e8f0fe;
+  box-shadow: inset 0 0 0 2px #1a73e8;
+  border-radius: 2px;
+}
+
+.sheets-cell-badge {
+  font-weight: 700;
+  color: #1a73e8;
+}
+
+.sheets-cell-qr {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+}
+
+.sheets-cell-qr code {
+  background: #f1f3f4;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: monospace;
+  color: #1e293b;
+  font-weight: 600;
+  word-break: break-all;
+  white-space: normal;
+}
+
+/* Category Badges in Master Sheet */
+.cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  user-select: none;
+}
+
+.cat-badge-desktop {
+  background: #e0e7ff;
+  color: #1e40af;
+  border-color: #c7d2fe;
+}
+
+.cat-badge-screen {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+/* Bottom Tabs Bar */
+.sheets-bottom-tabs-bar {
+  background: #f8f9fa;
+  border-top: 1px solid #dadce0;
+  padding: 4px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sheets-tab-pill {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #5f6368;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+
+.sheets-tab-pill:hover {
+  background: #e8eaed;
+  color: #202124;
+}
+
+.sheets-tab-pill.active {
+  background: #ffffff;
+  color: #1a73e8;
+  border-color: #dadce0;
+  border-bottom-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.sheets-tab-pill.active-master {
+  color: #0f9d58;
+}
+
+.sheets-tab-pill.active-desktop {
+  color: #2563eb;
+}
+
+.sheets-tab-pill.active-screen {
+  color: #059669;
+}
+
+.sheets-tab-badge {
+  font-size: 0.68rem;
+  background: #e8eaed;
+  color: #5f6368;
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* Empty State */
+.empty-stickers-state {
+  background: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  padding: 48px 32px;
+  text-align: center;
+  max-width: 520px;
+  margin: 40px auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 14px;
+}
+
+.empty-stickers-state h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.empty-stickers-state p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* ==========================================================================
+   REDESIGNED STICKER CARD - COMPACT ZERO-WASTED SPACE
+   Inline Label & Value: "CATEGORY: DESKTOP", "MODEL NO: ...", "SERIAL NO: ..."
+   No vertical gaps, no line breaks separating name from field
+   ========================================================================== */
+
+.ajts-sticker {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid var(--primary-blue);
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Top-Right Number Badge */
+.ajts-sticker .sticker-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--primary-blue);
+  color: #ffffff;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 4px 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 6px;
+  z-index: 5;
+  min-width: 32px;
+  text-align: center;
+  box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.15);
+  user-select: none;
+}
+
+.ajts-sticker .sticker-badge.badge-wide {
+  font-size: 1.05rem;
+  padding: 3.5px 8px;
+  min-width: 36px;
+}
+
+/* Header Section with Large Logo & Tight Layout */
+.ajts-sticker .sticker-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px 3px 8px;
+  margin-right: 38px; /* Clearance for badge */
+}
+
+.ajts-sticker .sticker-logo {
+  height: 44px;
+  width: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ajts-sticker .sticker-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ajts-sticker .sticker-company-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.0;
+}
+
+.ajts-sticker .company-name {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 1.35rem;
+  line-height: 0.95;
+  color: var(--primary-blue);
+  letter-spacing: 0.3px;
+}
+
+.ajts-sticker .company-subtitle {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 0.78rem;
+  line-height: 1.05;
+  color: #0b1325;
+  letter-spacing: 0.5px;
+  margin-top: 1.5px;
+}
+
+.ajts-sticker .company-tagline {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 0.52rem;
+  line-height: 1.05;
+  color: #0b1325;
+  letter-spacing: 0.9px;
+  margin-top: 1px;
+}
+
+/* Clean Slim Divider */
+.ajts-sticker .sticker-divider {
+  border-bottom: 1.2px solid #cbd5e1;
+  margin: 2px 8px 3px 8px;
+  opacity: 0.9;
+}
+
+/* Body Section: Clean inline pairs with ZERO space between name and field */
+.ajts-sticker .sticker-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1px 8px 5px 8px;
+  flex: 1;
+  gap: 6px;
+}
+
+.ajts-sticker .sticker-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3.5px; /* Clean, snug vertical distance between the 3 rows */
+  flex: 1;
+  min-width: 0;
+  padding-right: 2px;
+}
+
+.ajts-sticker .meta-field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Automatically drop to another line if not any space left */
+  align-items: baseline;
+  gap: 1.5px 3.5px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.15;
+}
+
+/* When Model or Serial needs full width, stack on another line */
+.ajts-sticker .meta-field.model-stacked,
+.ajts-sticker .meta-field.serial-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.ajts-sticker .meta-field.model-stacked .meta-label,
+.ajts-sticker .meta-field.serial-stacked .meta-label {
+  font-size: 0.50rem;
+  line-height: 1.0;
+  margin-bottom: 0.5px;
+}
+
+.ajts-sticker .meta-field.model-stacked .model-value,
+.ajts-sticker .meta-field.serial-stacked .serial-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.08;
+}
+
+/* Serial Font Scaling by Length */
+.ajts-sticker .meta-field.serial-md .serial-value,
+.ajts-sticker .serial-value.serial-md {
+  font-size: 0.68rem;
+  letter-spacing: -0.01em;
+}
+
+.ajts-sticker .meta-field.serial-lg .serial-value,
+.ajts-sticker .serial-value.serial-lg {
+  font-size: 0.58rem;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.ajts-sticker .meta-field.serial-xl .serial-value,
+.ajts-sticker .serial-value.serial-xl {
+  font-size: 0.50rem;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+/* Model Name Scaling */
+.ajts-sticker .meta-field.model-md .meta-value,
+.ajts-sticker .model-value.model-md {
+  font-size: 0.70rem;
+  letter-spacing: -0.01em;
+  white-space: normal !important;
+  word-break: break-word;
+}
+
+.ajts-sticker .meta-field.model-lg .meta-value,
+.ajts-sticker .model-value.model-lg {
+  font-size: 0.60rem;
+  letter-spacing: -0.02em;
+  white-space: normal !important;
+  word-break: break-word;
+  line-height: 1.08;
+}
+
+.ajts-sticker .meta-label {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 0.54rem;
+  color: var(--primary-blue);
+  letter-spacing: 0.3px;
+  line-height: 1.1;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ajts-sticker .meta-value {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 0.76rem;
+  color: #000000;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+  padding: 0;
+  white-space: normal !important;       /* NEVER force single line! */
+  overflow: visible !important;         /* NEVER hide text! */
+  text-overflow: clip !important;       /* NEVER show ... */
+  word-break: break-word;              /* Break words cleanly */
+  overflow-wrap: anywhere;             /* Wrap if long */
+}
+
+.ajts-sticker .meta-value.cat-tag-text {
+  color: var(--primary-blue);
+  font-weight: 900;
+}
+
+.ajts-sticker .sticker-qr {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.ajts-sticker .sticker-qr canvas,
+.ajts-sticker .sticker-qr img {
+  width: 100% !important;
+  height: 100% !important;
+  image-rendering: pixelated;
+}
+
+/* ==========================================================================
+   A4 SHEET SIMULATION & LAYOUTS (4 IN A ROW - PROPORTIONAL & TIGHT)
+   ========================================================================== */
+
+.a4-pages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  align-items: center;
+}
+
+.a4-page-wrapper {
+  position: relative;
+}
+
+.page-header-label {
+  position: absolute;
+  top: -24px;
+  left: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* A4 Sheet Dimensions */
+.a4-sheet {
+  background: #ffffff;
+  width: 210mm;
+  min-height: 297mm;
+  height: 297mm;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   PRIMARY: 24 PER A4 (4 IN A ROW × 6 ROWS)
+   Dimensions: 48mm × 33mm per sticker, 4 columns
+   Tight, zero-wasted space layout matching reference photo
+   ========================================================================== */
+.a4-sheet.grid-24-4x6 {
+  display: grid;
+  grid-template-columns: repeat(4, 48mm);
+  grid-template-rows: repeat(6, 33mm);
+  gap: 7mm 3.5mm;
+  justify-content: center;
+  align-content: center;
+  padding: 16mm 4.5mm;
+}
+
+.a4-sheet.grid-24-4x6 .ajts-sticker {
+  width: 48mm;
+  height: 33mm;
+  border-width: 1.6px;
+  border-radius: 6px;
+}
+
+.a4-sheet.grid-24-4x6 .sticker-badge {
+  font-size: 0.74rem;
+  padding: 2px 5px;
+  min-width: 18px;
+  border-bottom-left-radius: 6px;
+  border-top-right-radius: 4px;
+}
+
+.a4-sheet.grid-24-4x6 .sticker-badge.badge-wide {
+  font-size: 0.65rem;
+  padding: 1.5px 3.5px;
+  min-width: 22px;
+}
+
+.a4-sheet.grid-24-4x6 .sticker-header {
+  padding: 2px 4px 1px 4px;
+  margin-right: 22px;
+  gap: 3.5px;
+}
+
+.a4-sheet.grid-24-4x6 .sticker-logo {
+  height: 30px;
+  width: 30px;
+}
+
+.a4-sheet.grid-24-4x6 .company-name {
+  font-size: 0.88rem;
+  line-height: 0.9;
+}
+
+.a4-sheet.grid-24-4x6 .company-subtitle {
+  font-size: 0.48rem;
+  line-height: 1.0;
+  margin-top: 0.5px;
+}
+
+.a4-sheet.grid-24-4x6 .company-tagline {
+  font-size: 0.32rem;
+  letter-spacing: 0.4px;
+  margin-top: 0.5px;
+}
+
+.a4-sheet.grid-24-4x6 .sticker-divider {
+  margin: 1px 4px 1.5px 4px;
+  border-bottom-width: 0.8px;
+}
+
+.a4-sheet.grid-24-4x6 .sticker-body {
+  padding: 0 4px 2px 4px;
+  gap: 3px;
+}
+
+.a4-sheet.grid-24-4x6 .sticker-meta {
+  gap: 1.5px; /* Snug distance between Category, Model, Serial */
+  padding-right: 1px;
+}
+
+.a4-sheet.grid-24-4x6 .meta-field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Make in another line if not any space left */
+  align-items: baseline;
+  gap: 1px 2.5px;
+  line-height: 1.1;
+}
+
+.a4-sheet.grid-24-4x6 .meta-label {
+  font-size: 0.38rem;
+  margin: 0;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.a4-sheet.grid-24-4x6 .meta-value {
+  font-size: 0.54rem;
+  line-height: 1.1;
+  margin: 0;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* When Model is stacked / not enough space on line in grid-24 */
+.a4-sheet.grid-24-4x6 .meta-field.model-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5px;
+}
+
+.a4-sheet.grid-24-4x6 .meta-field.model-stacked .meta-label {
+  font-size: 0.35rem;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-24-4x6 .meta-field.model-stacked .model-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.08;
+}
+
+/* When serial is stacked / large number in grid-24 */
+.a4-sheet.grid-24-4x6 .meta-field.serial-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5px;
+}
+
+.a4-sheet.grid-24-4x6 .meta-field.serial-stacked .meta-label {
+  font-size: 0.35rem;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-24-4x6 .meta-field.serial-stacked .serial-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.05;
+}
+
+.a4-sheet.grid-24-4x6 .meta-field.serial-md .serial-value,
+.a4-sheet.grid-24-4x6 .serial-value.serial-md {
+  font-size: 0.50rem;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.a4-sheet.grid-24-4x6 .meta-field.serial-lg .serial-value,
+.a4-sheet.grid-24-4x6 .serial-value.serial-lg {
+  font-size: 0.44rem;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+.a4-sheet.grid-24-4x6 .meta-field.serial-xl .serial-value,
+.a4-sheet.grid-24-4x6 .serial-value.serial-xl {
+  font-size: 0.38rem;
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-24-4x6 .meta-field.model-md .meta-value,
+.a4-sheet.grid-24-4x6 .model-value.model-md {
+  font-size: 0.50rem;
+  letter-spacing: -0.01em;
+  white-space: normal !important;
+  word-break: break-word;
+}
+
+.a4-sheet.grid-24-4x6 .meta-field.model-lg .meta-value,
+.a4-sheet.grid-24-4x6 .model-value.model-lg {
+  font-size: 0.44rem;
+  letter-spacing: -0.02em;
+  white-space: normal !important;
+  word-break: break-word;
+  line-height: 1.05;
+}
+
+.a4-sheet.grid-24-4x6 .sticker-qr {
+  width: 17mm;
+  height: 17mm;
+}
+
+/* ==========================================================================
+   20 PER A4 (4 IN A ROW × 5 ROWS)
+   Dimensions: 48mm × 33mm per sticker, 4 columns
+   ========================================================================== */
+.a4-sheet.grid-20-4x5 {
+  display: grid;
+  grid-template-columns: repeat(4, 48mm);
+  grid-template-rows: repeat(5, 33mm);
+  gap: 14mm 3.5mm;
+  justify-content: center;
+  align-content: center;
+  padding: 24mm 4.5mm;
+}
+
+.a4-sheet.grid-20-4x5 .ajts-sticker {
+  width: 48mm;
+  height: 33mm;
+  border-width: 1.6px;
+  border-radius: 6px;
+}
+
+.a4-sheet.grid-20-4x5 .sticker-badge {
+  font-size: 0.74rem;
+  padding: 2px 5px;
+  min-width: 18px;
+  border-bottom-left-radius: 6px;
+  border-top-right-radius: 4px;
+}
+
+.a4-sheet.grid-20-4x5 .sticker-badge.badge-wide {
+  font-size: 0.65rem;
+  padding: 1.5px 3.5px;
+  min-width: 22px;
+}
+
+.a4-sheet.grid-20-4x5 .sticker-header {
+  padding: 2px 4px 1px 4px;
+  margin-right: 22px;
+  gap: 4px;
+}
+
+.a4-sheet.grid-20-4x5 .sticker-logo {
+  height: 30px;
+  width: 30px;
+}
+
+.a4-sheet.grid-20-4x5 .company-name {
+  font-size: 0.88rem;
+  line-height: 0.9;
+}
+
+.a4-sheet.grid-20-4x5 .company-subtitle {
+  font-size: 0.48rem;
+  line-height: 1.0;
+  margin-top: 0.5px;
+}
+
+.a4-sheet.grid-20-4x5 .company-tagline {
+  font-size: 0.32rem;
+  letter-spacing: 0.4px;
+  margin-top: 0.5px;
+}
+
+.a4-sheet.grid-20-4x5 .sticker-divider {
+  margin: 1px 4px 1.5px 4px;
+  border-bottom-width: 0.8px;
+}
+
+.a4-sheet.grid-20-4x5 .sticker-body {
+  padding: 0 4px 2px 4px;
+  gap: 3px;
+}
+
+.a4-sheet.grid-20-4x5 .sticker-meta {
+  gap: 1.5px;
+  padding-right: 1px;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1px 2.5px;
+  line-height: 1.1;
+}
+
+.a4-sheet.grid-20-4x5 .meta-label {
+  font-size: 0.38rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.a4-sheet.grid-20-4x5 .meta-value {
+  font-size: 0.54rem;
+  line-height: 1.1;
+  margin: 0;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.model-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5px;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.model-stacked .meta-label {
+  font-size: 0.35rem;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.model-stacked .model-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.08;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.serial-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5px;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.serial-stacked .meta-label {
+  font-size: 0.35rem;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.serial-stacked .serial-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.05;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.serial-md .serial-value,
+.a4-sheet.grid-20-4x5 .serial-value.serial-md {
+  font-size: 0.50rem;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.serial-lg .serial-value,
+.a4-sheet.grid-20-4x5 .serial-value.serial-lg {
+  font-size: 0.44rem;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.serial-xl .serial-value,
+.a4-sheet.grid-20-4x5 .serial-value.serial-xl {
+  font-size: 0.38rem;
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.model-md .meta-value,
+.a4-sheet.grid-20-4x5 .model-value.model-md {
+  font-size: 0.50rem;
+  letter-spacing: -0.01em;
+}
+
+.a4-sheet.grid-20-4x5 .meta-field.model-lg .meta-value,
+.a4-sheet.grid-20-4x5 .model-value.model-lg {
+  font-size: 0.44rem;
+  letter-spacing: -0.02em;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.05;
+}
+
+.a4-sheet.grid-20-4x5 .sticker-qr {
+  width: 17mm;
+  height: 17mm;
+}
+
+/* ==========================================================================
+   16 PER A4 (4 IN A ROW × 4 ROWS)
+   ========================================================================== */
+.a4-sheet.grid-16-4x4 {
+  display: grid;
+  grid-template-columns: repeat(4, 48mm);
+  grid-template-rows: repeat(4, 33mm);
+  gap: 20mm 3.5mm;
+  justify-content: center;
+  align-content: center;
+  padding: 26mm 4.5mm;
+}
+
+.a4-sheet.grid-16-4x4 .ajts-sticker {
+  width: 48mm;
+  height: 33mm;
+  border-width: 1.8px;
+  border-radius: 7px;
+}
+
+.a4-sheet.grid-16-4x4 .sticker-badge {
+  font-size: 0.76rem;
+  padding: 2px 5px;
+}
+
+.a4-sheet.grid-16-4x4 .sticker-badge.badge-wide {
+  font-size: 0.65rem;
+  padding: 1.5px 3.5px;
+  min-width: 22px;
+}
+
+.a4-sheet.grid-16-4x4 .sticker-header {
+  padding: 2px 4px 1px 4px;
+  margin-right: 22px;
+}
+
+.a4-sheet.grid-16-4x4 .sticker-logo {
+  height: 30px;
+  width: 30px;
+}
+
+.a4-sheet.grid-16-4x4 .company-name {
+  font-size: 0.88rem;
+}
+
+.a4-sheet.grid-16-4x4 .company-subtitle {
+  font-size: 0.48rem;
+}
+
+.a4-sheet.grid-16-4x4 .company-tagline {
+  font-size: 0.32rem;
+}
+
+.a4-sheet.grid-16-4x4 .sticker-divider {
+  margin: 1px 4px 1.5px 4px;
+}
+
+.a4-sheet.grid-16-4x4 .sticker-body {
+  padding: 0 4px 2px 4px;
+}
+
+.a4-sheet.grid-16-4x4 .sticker-meta {
+  gap: 1.5px;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1px 2.5px;
+}
+
+.a4-sheet.grid-16-4x4 .meta-label {
+  font-size: 0.38rem;
+  white-space: nowrap;
+}
+
+.a4-sheet.grid-16-4x4 .meta-value {
+  font-size: 0.54rem;
+  line-height: 1.1;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.model-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5px;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.model-stacked .meta-label {
+  font-size: 0.35rem;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.model-stacked .model-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.08;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.serial-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5px;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.serial-stacked .meta-label {
+  font-size: 0.35rem;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.serial-stacked .serial-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.05;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.serial-md .serial-value,
+.a4-sheet.grid-16-4x4 .serial-value.serial-md {
+  font-size: 0.50rem;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.serial-lg .serial-value,
+.a4-sheet.grid-16-4x4 .serial-value.serial-lg {
+  font-size: 0.44rem;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.serial-xl .serial-value,
+.a4-sheet.grid-16-4x4 .serial-value.serial-xl {
+  font-size: 0.38rem;
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.model-md .meta-value,
+.a4-sheet.grid-16-4x4 .model-value.model-md {
+  font-size: 0.50rem;
+  letter-spacing: -0.01em;
+}
+
+.a4-sheet.grid-16-4x4 .meta-field.model-lg .meta-value,
+.a4-sheet.grid-16-4x4 .model-value.model-lg {
+  font-size: 0.44rem;
+  letter-spacing: -0.02em;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.05;
+}
+
+.a4-sheet.grid-16-4x4 .sticker-qr {
+  width: 17mm;
+  height: 17mm;
+}
+
+/* ==========================================================================
+   15 PER PAGE (3 IN A ROW × 5 ROWS)
+   ========================================================================== */
+.a4-sheet.grid-15 {
+  display: grid;
+  grid-template-columns: repeat(3, 62mm);
+  grid-template-rows: repeat(5, 42mm);
+  gap: 8mm 4mm;
+  justify-content: center;
+  align-content: center;
+  padding: 16mm 6mm;
+}
+
+.a4-sheet.grid-15 .ajts-sticker {
+  width: 62mm;
+  height: 42mm;
+  border-width: 2px;
+  border-radius: 8px;
+}
+
+.a4-sheet.grid-15 .sticker-badge {
+  font-size: 0.95rem;
+  padding: 3px 7px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 6px;
+}
+
+.a4-sheet.grid-15 .sticker-header {
+  padding: 4px 6px 1px 6px;
+  margin-right: 24px;
+  gap: 6px;
+}
+
+.a4-sheet.grid-15 .sticker-logo {
+  height: 38px;
+  width: 38px;
+}
+
+.a4-sheet.grid-15 .company-name {
+  font-size: 1.12rem;
+  line-height: 0.95;
+}
+
+.a4-sheet.grid-15 .company-subtitle {
+  font-size: 0.65rem;
+  line-height: 1.05;
+  margin-top: 1px;
+}
+
+.a4-sheet.grid-15 .company-tagline {
+  font-size: 0.44rem;
+  letter-spacing: 0.8px;
+  margin-top: 1px;
+}
+
+.a4-sheet.grid-15 .sticker-divider {
+  margin: 2px 6px 3px 6px;
+  border-bottom-width: 1.1px;
+}
+
+.a4-sheet.grid-15 .sticker-body {
+  padding: 0 6px 4px 6px;
+}
+
+.a4-sheet.grid-15 .sticker-meta {
+  gap: 3px;
+}
+
+.a4-sheet.grid-15 .meta-field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1.5px 3.5px;
+}
+
+.a4-sheet.grid-15 .meta-label {
+  font-size: 0.46rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.a4-sheet.grid-15 .meta-value {
+  font-size: 0.68rem;
+  line-height: 1.1;
+  margin: 0;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.a4-sheet.grid-15 .meta-field.model-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.a4-sheet.grid-15 .meta-field.model-stacked .meta-label {
+  font-size: 0.42rem;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-15 .meta-field.model-stacked .model-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.1;
+}
+
+.a4-sheet.grid-15 .meta-field.serial-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.a4-sheet.grid-15 .meta-field.serial-stacked .meta-label {
+  font-size: 0.42rem;
+  line-height: 1.0;
+}
+
+.a4-sheet.grid-15 .meta-field.serial-stacked .serial-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+}
+
+.a4-sheet.grid-15 .meta-field.serial-md .serial-value,
+.a4-sheet.grid-15 .serial-value.serial-md {
+  font-size: 0.60rem;
+  letter-spacing: -0.01em;
+}
+
+.a4-sheet.grid-15 .meta-field.serial-lg .serial-value,
+.a4-sheet.grid-15 .serial-value.serial-lg {
+  font-size: 0.52rem;
+  letter-spacing: -0.01em;
+}
+
+.a4-sheet.grid-15 .meta-field.serial-xl .serial-value,
+.a4-sheet.grid-15 .serial-value.serial-xl {
+  font-size: 0.45rem;
+  letter-spacing: -0.02em;
+}
+
+.a4-sheet.grid-15 .meta-field.model-md .meta-value,
+.a4-sheet.grid-15 .model-value.model-md {
+  font-size: 0.62rem;
+}
+
+.a4-sheet.grid-15 .meta-field.model-lg .meta-value,
+.a4-sheet.grid-15 .model-value.model-lg {
+  font-size: 0.54rem;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.a4-sheet.grid-15 .sticker-qr {
+  width: 20mm;
+  height: 20mm;
+}
+
+/* ==========================================================================
+   8 PER PAGE (2 IN A ROW × 4 ROWS) - LARGE
+   ========================================================================== */
+.a4-sheet.grid-8 {
+  display: grid;
+  grid-template-columns: repeat(2, 94mm);
+  grid-template-rows: repeat(4, 58mm);
+  gap: 9mm 6mm;
+  justify-content: center;
+  align-content: center;
+  padding: 14mm 7mm;
+}
+
+.a4-sheet.grid-8 .ajts-sticker {
+  width: 94mm;
+  height: 58mm;
+  border-width: 2.6px;
+  border-radius: 12px;
+}
+
+.a4-sheet.grid-8 .sticker-badge {
+  font-size: 1.3rem;
+  padding: 5px 12px;
+}
+
+.a4-sheet.grid-8 .sticker-header {
+  padding: 8px 12px 3px 12px;
+  margin-right: 38px;
+  gap: 8px;
+}
+
+.a4-sheet.grid-8 .sticker-logo {
+  height: 48px;
+  width: 48px;
+}
+
+.a4-sheet.grid-8 .company-name {
+  font-size: 1.5rem;
+}
+
+.a4-sheet.grid-8 .company-subtitle {
+  font-size: 0.88rem;
+}
+
+.a4-sheet.grid-8 .company-tagline {
+  font-size: 0.58rem;
+  letter-spacing: 1px;
+}
+
+.a4-sheet.grid-8 .sticker-divider {
+  margin: 3px 12px 5px 12px;
+}
+
+.a4-sheet.grid-8 .sticker-body {
+  padding: 0 12px 7px 12px;
+}
+
+.a4-sheet.grid-8 .sticker-meta {
+  gap: 5px;
+}
+
+.a4-sheet.grid-8 .meta-field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 6px;
+}
+
+.a4-sheet.grid-8 .meta-label {
+  font-size: 0.65rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.a4-sheet.grid-8 .meta-value {
+  font-size: 0.95rem;
+  margin: 0;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.a4-sheet.grid-8 .meta-field.model-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.a4-sheet.grid-8 .meta-field.model-stacked .meta-label {
+  font-size: 0.60rem;
+}
+
+.a4-sheet.grid-8 .meta-field.model-stacked .model-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+}
+
+.a4-sheet.grid-8 .meta-field.serial-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.a4-sheet.grid-8 .meta-field.serial-stacked .meta-label {
+  font-size: 0.60rem;
+}
+
+.a4-sheet.grid-8 .meta-field.serial-stacked .serial-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+}
+
+.a4-sheet.grid-8 .meta-field.serial-md .serial-value,
+.a4-sheet.grid-8 .serial-value.serial-md {
+  font-size: 0.90rem;
+}
+
+.a4-sheet.grid-8 .meta-field.serial-lg .serial-value,
+.a4-sheet.grid-8 .serial-value.serial-lg {
+  font-size: 0.78rem;
+}
+
+.a4-sheet.grid-8 .meta-field.serial-xl .serial-value,
+.a4-sheet.grid-8 .serial-value.serial-xl {
+  font-size: 0.68rem;
+}
+
+.a4-sheet.grid-8 .sticker-qr {
+  width: 27mm;
+  height: 27mm;
+}
+
+/* ==========================================================================
+   16 PER PAGE (2 IN A ROW × 8 ROWS)
+   ========================================================================== */
+.a4-sheet.grid-16 {
+  display: grid;
+  grid-template-columns: repeat(2, 95mm);
+  grid-template-rows: repeat(8, 30mm);
+  gap: 4mm 5mm;
+  justify-content: center;
+  align-content: center;
+  padding: 12mm 6mm;
+}
+
+.a4-sheet.grid-16 .ajts-sticker {
+  width: 95mm;
+  height: 30mm;
+  border-width: 1.6px;
+  border-radius: 6px;
+}
+
+.a4-sheet.grid-16 .sticker-badge {
+  font-size: 0.85rem;
+  padding: 2px 7px;
+}
+
+.a4-sheet.grid-16 .sticker-header {
+  padding: 3px 7px 1px 7px;
+  margin-right: 24px;
+  gap: 5px;
+}
+
+.a4-sheet.grid-16 .sticker-logo {
+  height: 26px;
+  width: 26px;
+}
+
+.a4-sheet.grid-16 .company-name {
+  font-size: 0.88rem;
+}
+
+.a4-sheet.grid-16 .company-subtitle {
+  font-size: 0.52rem;
+}
+
+.a4-sheet.grid-16 .company-tagline {
+  font-size: 0.36rem;
+}
+
+.a4-sheet.grid-16 .sticker-divider {
+  margin: 1px 7px 2px 7px;
+}
+
+.a4-sheet.grid-16 .sticker-body {
+  padding: 0 7px 2px 7px;
+}
+
+.a4-sheet.grid-16 .sticker-meta {
+  gap: 2px;
+}
+
+.a4-sheet.grid-16 .meta-field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1.5px 3.5px;
+}
+
+.a4-sheet.grid-16 .meta-label {
+  font-size: 0.44rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.a4-sheet.grid-16 .meta-value {
+  font-size: 0.65rem;
+  margin: 0;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.a4-sheet.grid-16 .meta-field.model-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.a4-sheet.grid-16 .meta-field.model-stacked .meta-label {
+  font-size: 0.40rem;
+}
+
+.a4-sheet.grid-16 .meta-field.model-stacked .model-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+}
+
+.a4-sheet.grid-16 .meta-field.serial-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.a4-sheet.grid-16 .meta-field.serial-stacked .meta-label {
+  font-size: 0.40rem;
+}
+
+.a4-sheet.grid-16 .meta-field.serial-stacked .serial-value {
+  width: 100%;
+  white-space: normal !important;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  text-overflow: clip !important;
+  overflow: visible !important;
+}
+
+.a4-sheet.grid-16 .meta-field.serial-md .serial-value,
+.a4-sheet.grid-16 .serial-value.serial-md {
+  font-size: 0.68rem;
+}
+
+.a4-sheet.grid-16 .meta-field.serial-lg .serial-value,
+.a4-sheet.grid-16 .serial-value.serial-lg {
+  font-size: 0.58rem;
+}
+
+.a4-sheet.grid-16 .meta-field.serial-xl .serial-value,
+.a4-sheet.grid-16 .serial-value.serial-xl {
+  font-size: 0.50rem;
+}
+
+.a4-sheet.grid-16 .sticker-qr {
+  width: 15mm;
+  height: 15mm;
+}
+
+/* Optional Cutting Guidelines */
+.show-cutting-guides .ajts-sticker {
+  outline: 1px dashed rgba(148, 163, 184, 0.65);
+  outline-offset: 2mm;
+}
+
+/* Single Sticker Zoom Mode - Snug, high-definition & filled */
+.single-sticker-wrapper {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 520px;
+  width: 100%;
+}
+
+.single-sticker-wrapper .ajts-sticker {
+  width: 100% !important;
+  max-width: 440px !important;
+  border-width: 3.5px !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 30px rgba(0, 44, 145, 0.15) !important;
+}
+
+.single-sticker-wrapper .sticker-badge {
+  font-size: 1.6rem !important;
+  padding: 7px 16px 8px 16px !important;
+  border-bottom-left-radius: 14px !important;
+  border-top-right-radius: 10px !important;
+}
+
+.single-sticker-wrapper .sticker-header {
+  padding: 10px 14px 4px 14px !important;
+  margin-right: 52px !important;
+  gap: 12px !important;
+}
+
+.single-sticker-wrapper .sticker-logo {
+  height: 60px !important;
+  width: 60px !important;
+}
+
+.single-sticker-wrapper .company-name {
+  font-size: 1.95rem !important;
+  line-height: 0.95 !important;
+}
+
+.single-sticker-wrapper .company-subtitle {
+  font-size: 1.08rem !important;
+  margin-top: 2px !important;
+}
+
+.single-sticker-wrapper .company-tagline {
+  font-size: 0.72rem !important;
+  letter-spacing: 1.2px !important;
+  margin-top: 2px !important;
+}
+
+.single-sticker-wrapper .sticker-divider {
+  margin: 3px 14px 6px 14px !important;
+  border-bottom-width: 1.6px !important;
+}
+
+.single-sticker-wrapper .sticker-body {
+  padding: 0 14px 10px 14px !important;
+  gap: 10px !important;
+}
+
+.single-sticker-wrapper .sticker-meta {
+  gap: 6px !important; /* Clean distance between Category, Model, Serial */
+}
+
+.single-sticker-wrapper .meta-field {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: baseline !important;
+  gap: 4px 8px !important;
+}
+
+.single-sticker-wrapper .meta-label {
+  font-size: 0.72rem !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+}
+
+.single-sticker-wrapper .meta-value {
+  font-size: 1.12rem !important;
+  margin: 0 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+.single-sticker-wrapper .meta-field.model-stacked {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 2px !important;
+}
+
+.single-sticker-wrapper .meta-field.model-stacked .meta-label {
+  font-size: 0.65rem !important;
+}
+
+.single-sticker-wrapper .meta-field.model-stacked .model-value {
+  width: 100% !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.15 !important;
+}
+
+.single-sticker-wrapper .meta-field.serial-stacked {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 2px !important;
+}
+
+.single-sticker-wrapper .meta-field.serial-stacked .meta-label {
+  font-size: 0.65rem !important;
+}
+
+.single-sticker-wrapper .meta-field.serial-stacked .serial-value {
+  white-space: normal !important;
+  word-break: break-all !important;
+  overflow-wrap: anywhere !important;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  line-height: 1.15 !important;
+  width: 100% !important;
+}
+
+.single-sticker-wrapper .meta-field.serial-md .serial-value,
+.single-sticker-wrapper .serial-value.serial-md {
+  font-size: 1.0rem !important;
+}
+
+.single-sticker-wrapper .meta-field.serial-lg .serial-value,
+.single-sticker-wrapper .serial-value.serial-lg {
+  font-size: 0.88rem !important;
+}
+
+.single-sticker-wrapper .meta-field.serial-xl .serial-value,
+.single-sticker-wrapper .serial-value.serial-xl {
+  font-size: 0.76rem !important;
+}
+
+.single-sticker-wrapper .meta-field.model-md .meta-value,
+.single-sticker-wrapper .model-value.model-md {
+  font-size: 1.0rem !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+.single-sticker-wrapper .meta-field.model-lg .meta-value,
+.single-sticker-wrapper .model-value.model-lg {
+  font-size: 0.85rem !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+.comparison-card .meta-field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 4px;
+}
+
+.comparison-card .meta-field.model-stacked,
+.comparison-card .meta-field.serial-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.comparison-card .meta-field.model-stacked .model-value,
+.comparison-card .meta-field.serial-stacked .serial-value {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+}
+
+.single-sticker-wrapper .sticker-qr {
+  width: 100px !important;
+  height: 100px !important;
+}
+
+/* Comparison View */
+.comparison-view {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.comparison-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comparison-card h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #111827;
+  padding: 4px 14px;
+  border-radius: 6px;
+  border: 1px solid #1e293b;
+}
+
+.comparison-card img.ref-img {
+  width: 420px;
+  max-width: 90vw;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   PRINT MEDIA STYLES - PERFECT A4 PRINTING
+   ========================================================================== */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff !important;
+    color: #000000 !important;
+    width: 210mm;
+    height: 297mm;
+    overflow: visible;
+  }
+
+  .app-header,
+  .sidebar-panel,
+  .workspace-toolbar,
+  .page-header-label,
+  .single-sticker-wrapper,
+  .comparison-view,
+  .google-sheets-container,
+  .empty-stickers-state,
+  .no-print {
+    display: none !important;
+  }
+
+  .app-container,
+  .main-workspace,
+  .preview-viewport {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm !important;
+    height: auto !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  .a4-pages-container {
+    display: block !important;
+    gap: 0 !important;
+  }
+
+  .a4-page-wrapper {
+    page-break-after: always;
+    break-after: page;
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 0;
+  }
+
+  .a4-sheet {
+    box-shadow: none !important;
+    margin: 0 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    max-height: 297mm !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* Notifications Toast */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background: #1e293b;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 4px solid var(--accent-blue);
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   Authentication & Security Modal System
+   ========================================================================== */
+
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background: rgba(9, 13, 23, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.auth-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.auth-modal-card {
+  background: #111827;
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 44, 145, 0.3);
+  width: 100%;
+  max-width: 440px;
+  padding: 32px 28px;
+  position: relative;
+  animation: authFadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes authFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.auth-modal-card.shake {
+  animation: authShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes authShake {
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(4px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-5px, 0, 0); }
+  40%, 60% { transform: translate3d(5px, 0, 0); }
+}
+
+.auth-brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-surface);
+}
+
+.auth-logo-box {
+  width: 46px;
+  height: 46px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.auth-logo-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.auth-brand-text h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.auth-brand-text span {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.auth-header-info {
+  margin-bottom: 20px;
+}
+
+.auth-header-info h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 6px;
+}
+
+.auth-header-info p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.auth-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  font-size: 0.8rem;
+  color: #fca5a5;
+  animation: authFadeIn 0.2s ease-out;
+}
+
+@keyframes authFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-alert-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-field-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.auth-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #0b0f19;
+  border: 1.5px solid #1e293b;
+  border-radius: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-input-wrapper:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+.auth-input-icon {
+  padding: 0 12px;
+  font-size: 0.95rem;
+  color: #64748b;
+  user-select: none;
+}
+
+.auth-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  padding: 11px 10px 11px 0;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.auth-input::placeholder {
+  color: #475569;
+}
+
+.auth-pw-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0 12px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+}
+
+.auth-pw-btn:hover {
+  color: #ffffff;
+}
+
+.auth-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -4px;
+}
+
+.auth-remember-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  cursor: pointer;
+  user-select: none;
+}
+
+.auth-remember-label input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: var(--accent-blue);
+  width: 14px;
+  height: 14px;
+}
+
+.auth-submit-btn {
+  background: linear-gradient(135deg, #002c91 0%, #2563eb 100%);
+  color: #ffffff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s, filter 0.15s;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.auth-submit-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+}
+
+.auth-submit-btn:active {
+  transform: translateY(0);
+}
+
+.auth-demo-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px dashed rgba(100, 116, 139, 0.4);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 20px;
+  font-size: 0.76rem;
+  color: #94a3b8;
+}
+
+.auth-demo-text code {
+  background: #0b0f19;
+  color: #38bdf8;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.auth-demo-btn {
+  background: rgba(37, 99, 235, 0.18);
+  border: 1px solid rgba(37, 99, 235, 0.4);
+  color: #60a5fa;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+  transition: all 0.15s;
+}
+
+.auth-demo-btn:hover {
+  background: rgba(37, 99, 235, 0.35);
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+/* Top Header User Badge & Logout Button */
+.user-session-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid #1e293b;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  color: #e2e8f0;
+  font-weight: 600;
+  user-select: none;
+}
+
+.user-avatar-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+  display: inline-block;
+}
+
+.user-role-tag {
+  background: rgba(37, 99, 235, 0.25);
+  color: #60a5fa;
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.btn-logout {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background: rgba(239, 68, 68, 0.25) !important;
+  color: #ffffff !important;
+  border-color: #ef4444 !important;
+  transform: translateY(-1px);
+}
+
+/* Settings Tab Security Box */
+.settings-security-box {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.settings-security-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.settings-security-header h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.security-active-pill {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.settings-security-sub {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.security-pw-form .form-group {
+  margin-bottom: 10px;
+}
+
+/* Users List & Management */
+.users-list-wrapper {
+  margin-bottom: 12px;
+}
+
+.users-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.users-list-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.users-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 190px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.user-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0b0f19;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  transition: border-color 0.15s;
+}
+
+.user-item-row:hover {
+  border-color: #334155;
+}
+
+.user-item-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-item-name {
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.user-role-badge-admin {
+  background: rgba(37, 99, 235, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.user-role-badge-operator {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.user-item-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-current-tag {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.btn-del-user {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-del-user:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
+/* Add User Box */
+.add-user-box {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  animation: authFadeIn 0.2s ease-out;
+}
+
+.add-user-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.add-user-box-header h5 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.btn-close-sm {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0 4px;
+}
+
+.btn-close-sm:hover {
+  color: #ffffff;
+}
